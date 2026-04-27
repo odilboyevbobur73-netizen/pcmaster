@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCMaster — Kompyuter va Noutbuk Sozlash | Toshkent</title>
+  <meta name="description" content="Toshkentda kompyuter va noutbuk sozlash, ta'mirlash, Windows o'rnatish, virus tozalash xizmati. Tez, arzon, kafolat bilan. Telegramda buyurtma bering." />
+  <meta name="keywords" content="kompyuter sozlash, noutbuk tamirlash, windows o'rnatish, virus tozalash, toshkent, kompyuter xizmati, noutbuk sozlash" />
+  <meta name="author" content="PCMaster" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcmaster.uz/" />
+
+  <!-- Open Graph (Facebook, Telegram preview) -->
+  <meta property="og:title" content="PCMaster — Kompyuter va Noutbuk Sozlash Xizmati" />
+  <meta property="og:description" content="Toshkentda kompyuter va noutbuk sozlash, ta'mirlash, Windows o'rnatish, virus tozalash. Kafolat bilan." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pcmaster.uz/" />
+  <meta property="og:locale" content="uz_UZ" />
+
+  <!-- Google Search structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "PCMaster",
+    "description": "Kompyuter va noutbuk sozlash, ta'mirlash xizmati",
+    "url": "https://pcmaster.uz",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toshkent",
+      "addressCountry": "UZ"
+    },
+    "openingHours": "Mo-Su 09:00-21:00",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://t.me/texno_uz",
+      "https://instagram.com/texno.uz"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root[data-theme="dark"] {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --white: #f0f6fc;
+      --blue: #0a74da;
+      --shadow: rgba(0,0,0,0.4);
+    }
+    :root[data-theme="light"] {
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --border: #d0d7de;
+      --text: #57606a;
+      --white: #1f2328;
+      --blue: #0969da;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--white); }
+    .logo span { color: var(--blue); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a { text-decoration: none; color: var(--text); font-size: 0.95rem; transition: color 0.2s; }
+    nav ul a:hover { color: var(--blue); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-btn {
+      background: var(--blue); color: #fff; padding: 9px 22px;
+      border-radius: 8px; text-decoration: none; font-weight: 600; transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.85; }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 12px; cursor: pointer;
+      font-size: 1.1rem; transition: background 0.2s;
+    }
+    .theme-toggle:hover { background: var(--border); }
+
+    /* SEARCH BTN */
+    .search-btn {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px; cursor: pointer;
+      font-size: 1.1rem; transition: background 0.2s; color: var(--text);
+    }
+    .search-btn:hover { background: var(--border); }
+
+    /* SEARCH MODAL */
+    .search-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7); z-index: 200;
+      align-items: flex-start; justify-content: center;
+      padding-top: 80px; backdrop-filter: blur(4px);
+    }
+    .search-overlay.active { display: flex; }
+    .search-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; width: 100%; max-width: 620px;
+      padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: slideDown 0.2s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .search-input-wrap {
+      display: flex; align-items: center; gap: 12px;
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 16px; margin-bottom: 16px;
+      background: var(--bg);
+    }
+    .search-input-wrap:focus-within { border-color: var(--blue); }
+    .search-input-wrap span { font-size: 1.2rem; }
+    .search-input {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--white); font-size: 1rem; font-family: inherit;
+    }
+    .search-input::placeholder { color: var(--text); }
+    .search-close {
+      background: none; border: none; color: var(--text);
+      font-size: 1.4rem; cursor: pointer; padding: 0 4px;
+      transition: color 0.2s;
+    }
+    .search-close:hover { color: var(--white); }
+    .search-results { display: flex; flex-direction: column; gap: 8px; max-height: 380px; overflow-y: auto; }
+    .search-result-item {
+      padding: 14px 16px; border-radius: 10px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg);
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none; display: block;
+    }
+    .search-result-item:hover { border-color: var(--blue); background: var(--card); }
+    .result-category {
+      font-size: 0.75rem; color: var(--blue); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+    }
+    .result-title { color: var(--white); font-weight: 600; font-size: 0.97rem; margin-bottom: 4px; }
+    .result-desc { color: var(--text); font-size: 0.85rem; line-height: 1.5; }
+    .result-highlight { background: #0a74da33; border-radius: 3px; padding: 0 2px; color: var(--blue); }
+    .search-empty { text-align: center; padding: 30px; color: var(--text); font-size: 0.95rem; }
+    .search-hint {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;
+    }
+    .hint-tag {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 12px; font-size: 0.82rem;
+      cursor: pointer; transition: border-color 0.2s; color: var(--text);
+    }
+    .hint-tag:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      text-align: center; padding: 100px 20px 80px;
+      background: radial-gradient(ellipse at 50% 0%, #0a74da22 0%, transparent 70%);
+    }
+    .badge {
+      display: inline-block; background: #0a74da18;
+      border: 1px solid #0a74da55; color: var(--blue);
+      padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: 3.2rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 20px; }
+    .hero h1 span { color: var(--blue); }
+    .hero p { font-size: 1.1rem; max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff; padding: 14px 32px;
+      border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      border: 1px solid var(--border); color: var(--white); padding: 14px 32px;
+      border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue); }
+
+    /* STATS */
+    .stats {
+      display: flex; justify-content: center; gap: 60px;
+      padding: 50px 20px; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); flex-wrap: wrap;
+    }
+    .stat h3 { font-size: 2.4rem; font-weight: 800; color: var(--blue); }
+    .stat p { font-size: 0.9rem; margin-top: 4px; }
+
+    /* SECTIONS */
+    .section { padding: 80px 60px; }
+    .section-title { text-align: center; margin-bottom: 50px; }
+    .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+    .section-title p { font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; }
+
+    /* CARDS */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 30px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 8px 30px var(--shadow); }
+    .card-icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .card h3 { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .card p { font-size: 0.92rem; line-height: 1.7; }
+    .price-tag {
+      display: inline-block; margin-top: 16px; background: #0a74da18;
+      border: 1px solid #0a74da44; color: var(--blue);
+      padding: 4px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+    }
+
+    /* NIMA UCHUN */
+    .why { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .why-text h2 { font-size: 2rem; font-weight: 800; color: var(--white); margin-bottom: 20px; }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .why-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; line-height: 1.6; }
+    .check {
+      width: 22px; height: 22px; background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 0.7rem; color: #fff; margin-top: 2px;
+    }
+    .why-image {
+      background: linear-gradient(135deg, #0a74da22, var(--bg));
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 40px; text-align: center; font-size: 8rem;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .portfolio-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px var(--shadow); }
+    .portfolio-img {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; background: linear-gradient(135deg, #0a74da18, var(--bg));
+    }
+    .portfolio-body { padding: 20px; }
+    .portfolio-body h4 { color: var(--white); font-size: 1rem; margin-bottom: 8px; }
+    .portfolio-body p { font-size: 0.88rem; line-height: 1.6; }
+    .portfolio-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .tag {
+      background: #0a74da18; border: 1px solid #0a74da44; color: var(--blue);
+      padding: 3px 10px; border-radius: 20px; font-size: 0.78rem;
+    }
+
+    /* JARAYON */
+    .steps { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; margin-top: 20px; }
+    .step { text-align: center; padding: 20px 30px; flex: 1; min-width: 180px; position: relative; }
+    .step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -10px; top: 50%;
+      transform: translateY(-50%); font-size: 1.5rem; color: var(--blue);
+    }
+    .step-num {
+      width: 50px; height: 50px; background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 800; color: #fff; margin: 0 auto 14px;
+    }
+    .step h4 { color: var(--white); font-size: 1rem; margin-bottom: 6px; }
+    .step p { font-size: 0.85rem; }
+
+    /* REVIEWS */
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .review-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+    .stars { color: #f0b429; font-size: 1.1rem; margin-bottom: 14px; }
+    .review-text { font-size: 0.93rem; line-height: 1.7; font-style: italic; margin-bottom: 18px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: 1rem; flex-shrink: 0;
+    }
+    .reviewer-info h5 { color: var(--white); font-size: 0.95rem; }
+    .reviewer-info span { font-size: 0.82rem; }
+
+    /* FAQ */
+    .faq-list { max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .faq-q {
+      padding: 18px 22px; cursor: pointer; display: flex; justify-content: space-between;
+      align-items: center; color: var(--white); font-weight: 600; font-size: 0.97rem;
+      transition: background 0.2s; user-select: none;
+    }
+    .faq-q:hover { background: var(--border); }
+    .faq-icon { font-size: 1.2rem; transition: transform 0.3s; color: var(--blue); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s;
+      padding: 0 22px; font-size: 0.92rem; line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 22px 18px; }
+
+    /* FORM */
+    .form-wrap {
+      max-width: 650px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .form-group label { font-size: 0.9rem; color: var(--white); font-weight: 600; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 16px; color: var(--white); font-size: 0.95rem; font-family: inherit;
+      transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--blue); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--bg); }
+    .form-submit {
+      width: 100%; padding: 14px; background: var(--blue); color: #fff;
+      border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .form-submit:hover { opacity: 0.85; }
+    .form-success {
+      display: none; text-align: center; padding: 20px;
+      color: #3fb950; font-size: 1.1rem; font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 30px; max-width: 800px; margin: 0 auto;
+    }
+    .contact-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 30px; text-align: center; transition: border-color 0.2s;
+    }
+    .contact-card:hover { border-color: var(--blue); }
+    .contact-card .icon { font-size: 2.5rem; margin-bottom: 14px; }
+    .contact-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 8px; }
+    .contact-card a { color: var(--blue); text-decoration: none; font-size: 1.1rem; font-weight: 600; }
+
+    /* SOCIAL BTNS */
+    .social-btns { display: flex; justify-content: center; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+    .social-btn {
+      display: flex; align-items: center; gap: 10px; padding: 14px 28px;
+      border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .social-btn:hover { transform: translateY(-3px); opacity: 0.9; }
+    .social-btn.telegram { background: #229ED9; color: #fff; }
+    .social-btn.instagram {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+    }
+    .social-btn svg { width: 22px; height: 22px; fill: #fff; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 30px;
+      border-top: 1px solid var(--border); font-size: 0.88rem; color: #6e7681;
+    }
+    footer span { color: var(--blue); }
+    .footer-socials { display: flex; justify-content: center; gap: 14px; margin-bottom: 14px; }
+    .footer-social-link {
+      width: 38px; height: 38px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; transition: transform 0.2s;
+    }
+    .footer-social-link:hover { transform: scale(1.15); }
+    .footer-social-link.tg { background: #229ED9; }
+    .footer-social-link.ig {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+    .footer-social-link svg { width: 18px; height: 18px; fill: #fff; }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 46px; height: 46px; background: var(--blue); color: #fff;
+      border: none; border-radius: 50%; font-size: 1.4rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s; z-index: 99;
+      box-shadow: 0 4px 16px rgba(10,116,218,0.4);
+    }
+    #backToTop.show { opacity: 1; pointer-events: all; }
+    #backToTop:hover { transform: translateY(-3px); }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      nav ul { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .section { padding: 60px 20px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-image { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .step::after { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">PC<span>Master</span></div>
+  <ul>
+    <li><a href="#xizmatlar">Xizmatlar</a></li>
+    <li><a href="#portfolio">Ishlar</a></li>
+    <li><a href="#sharhlar">Sharhlar</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#aloqa">Aloqa</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="search-btn" onclick="openSearch()" title="Qidirish">🔍</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Tema almashtirish">🌙</button>
+    <a href="#ariza" class="nav-btn">Murojaat qilish</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">⚡ Toshkentdagi eng tez xizmat</div>
+  <h1>Kompyuter va Noutbuk<br/><span>Muammolarini</span> Hal Qilamiz</h1>
+  <p>Sozlash, ta'mirlash, o'rnatish — barcha kompyuter va noutbuk xizmatlarini professional darajada bajaramiz. Kafolat bilan.</p>
+  <div class="hero-btns">
+    <a href="#xizmatlar" class="btn-primary">Xizmatlarni ko'rish</a>
+    <a href="#ariza" class="btn-secondary">Ariza qoldirish</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat fade-up"><h3>500+</h3><p>Mamnun mijoz</p></div>
+  <div class="stat fade-up"><h3>3 yil</h3><p>Tajriba</p></div>
+  <div class="stat fade-up"><h3>1 soat</h3><p>O'rtacha xizmat vaqti</p></div>
+  <div class="stat fade-up"><h3>100%</h3><p>Kafolat</p></div>
+</div>
+
+<!-- XIZMATLAR -->
+<section class="section" id="xizmatlar">
+  <div class="section-title fade-up">
+    <h2>Bizning Xizmatlar</h2>
+    <p>Kompyuter va noutbuklar bilan bog'liq barcha muammolarni hal qilamiz</p>
+  </div>
+  <div class="grid-3">
+    <div class="card fade-up">
+      <div class="card-icon">🖥️</div>
+      <h3>Windows O'rnatish</h3>
+      <p>Kompyuter va noutbuklarga Windows 10/11 o'rnatish, drayverlar va zarur dasturlar bilan.</p>
+      <span class="price-tag">50,000 so'm dan</span>
+    </div>
+    <div class="card fade-up">
+      <div class="card-icon">⚡</div>
+      <h3>Tezlashtirish & Optimizatsiya</h3>
+      <p>Sekin kompyuter yoki noutbukni optimizatsiya qilib, tezligini 2-3 barobar oshiramiz.</p>
+      <span class="price-tag">60,000 so'm dan</span>
+    </div>
+    <div class="card fade-up">
+      <div class="card-icon">🦠</div>
+      <h3>Virus Tozalash</h3>
+      <p>Virus, troyan va zararli dasturlardan kompyuter yoki noutbukni to'liq tozalaymiz.</p>
+      <span class="price-tag">70,000 so'm dan</span>
+    </div>
+    <div class="card fade-up">
+      <div class="card-icon">🌐</div>
+      <h3>Internet & Wi-Fi Sozlash</h3>
+      <p>Kompyuter va noutbuklarda Wi-Fi, router ulanishini sozlash va nosozliklarni bartaraf etish.</p>
+      <span class="price-tag">40,000 so'm dan</span>
+    </div>
+    <div class="card fade-up">
+      <div class="card-icon">💾</div>
+      <h3>Ma'lumot Tiklash</h3>
+      <p>Kompyuter yoki noutbuk diskidan o'chirilgan yoki shikastlangan ma'lumotlarni tiklaymiz.</p>
+      <span class="price-tag">100,000 so'm dan</span>
+    </div>
+    <div class="card fade-up">
+      <div class="card-icon">🔧</div>
+      <h3>Noutbuk Ta'mirlash</h3>
+      <p>Noutbuk klaviaturasi, ekrani, batareyasi, quvvat bloki va boshqa qismlarni ta'mirlash.</p>
+      <span class="price-tag">Narx kelishiladi</span>
+    </div>
+  </div>
+</section>
+
+<!-- NIMA UCHUN -->
+<section class="section why" id="nima-uchun">
+  <div class="why-grid">
+    <div class="why-text fade-up">
+      <h2>Nima uchun<br/>PCMaster?</h2>
+      <ul class="why-list">
+        <li><div class="check">✓</div><div><strong style="color:var(--white)">Tez xizmat</strong> — Ko'p hollarda 1 soat ichida hal qilinadi</div></li>
+        <li><div class="check">✓</div><div><strong style="color:var(--white)">Kafolat</strong> — Har bir xizmat uchun 30 kunlik kafolat beramiz</div></li>
+        <li><div class="check">✓</div><div><strong style="color:var(--white)">Uyga chiqish</strong> — Siz chiqmasdan, biz sizga kelamiz</div></li>
+        <li><div class="check">✓</div><div><strong style="color:var(--white)">Arzon narxlar</strong> — Bozordagi eng qulay narxlar</div></li>
+        <li><div class="check">✓</div><div><strong style="color:var(--white)">Tajribali mutaxassislar</strong> — 3+ yillik tajribali jamoa</div></li>
+      </ul>
+    </div>
+    <div class="why-image fade-up">💻</div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="section-title fade-up">
+    <h2>Bajarilgan Ishlar</h2>
+    <p>Oxirgi bajargan ishlarimizdan namunalar</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-img">🖥️</div>
+      <div class="portfolio-body">
+        <h4>Gaming PC — To'liq sozlash</h4>
+        <p>Yangi yig'ilgan gaming kompyuterga Windows, drayverlar, RGB va overclocking sozlash bajarildi.</p>
+        <div class="portfolio-tags">
+          <span class="tag">Windows 11</span>
+          <span class="tag">Drayver</span>
+          <span class="tag">Gaming</span>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-img">💻</div>
+      <div class="portfolio-body">
+        <h4>Noutbuk — Tezlashtirish</h4>
+        <p>5 yillik noutbukni tozalash, termal pasta almashtirish va SSD o'rnatish orqali 3x tezlashtirildi.</p>
+        <div class="portfolio-tags">
+          <span class="tag">SSD</span>
+          <span class="tag">Termal pasta</span>
+          <span class="tag">Tozalash</span>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-img">🔒</div>
+      <div class="portfolio-body">
+        <h4>Virus Hujumidan Tiklash</h4>
+        <p>Ransomware virusidan zararlangan kompyuterni to'liq tiklash va muhim ma'lumotlar qaytarildi.</p>
+        <div class="portfolio-tags">
+          <span class="tag">Virus</span>
+          <span class="tag">Ma'lumot tiklash</span>
+          <span class="tag">Himoya</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARAYON -->
+<section class="section" id="jarayon" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-title fade-up">
+    <h2>Qanday Ishlaymiz</h2>
+    <p>To'rtta oddiy qadam</p>
+  </div>
+  <div class="steps">
+    <div class="step fade-up"><div class="step-num">1</div><h4>Murojaat</h4><p>Telegram orqali bog'laning</p></div>
+    <div class="step fade-up"><div class="step-num">2</div><h4>Diagnostika</h4><p>Muammo aniqlanadi, narx aytiladi</p></div>
+    <div class="step fade-up"><div class="step-num">3</div><h4>Xizmat</h4><p>Professional tarzda bajariladi</p></div>
+    <div class="step fade-up"><div class="step-num">4</div><h4>Topshirish</h4><p>Kafolat bilan topshiriladi</p></div>
+  </div>
+</section>
+
+<!-- SHARHLAR -->
+<section class="section" id="sharhlar">
+  <div class="section-title fade-up">
+    <h2>Mijozlar Sharhlari</h2>
+    <p>Bizning xizmatimizdan foydalanganlar nima deydi</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Noutbukim juda sekin ishlayotgan edi. PCMaster uni 1 soatda tezlashtirdi — go'yo yangi noutbuk oldim. Juda mamnunman!"</p>
+      <div class="reviewer">
+        <div class="avatar">A</div>
+        <div class="reviewer-info"><h5>Abdullayev Jasur</h5><span>Toshkent</span></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Kompyuterimda virus bor edi va barcha fayllarim shifrlangan edi. Fayllarimni qaytarib berishdi! Kasbiy mutaxassislar."</p>
+      <div class="reviewer">
+        <div class="avatar">M</div>
+        <div class="reviewer-info"><h5>Mirzayeva Malika</h5><span>Chilonzor</span></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Windows o'rnatish kerak edi. Uyimga kelishdi, o'rnatishdi, barcha drayverlar ham tayyor. Narxi ham arzon. Tavsiya qilaman!"</p>
+      <div class="reviewer">
+        <div class="avatar">S</div>
+        <div class="reviewer-info"><h5>Sotvoldiyev Sherzod</h5><span>Yunusobod</span></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Noutbuk ekrani singan edi. Bir kunda almashtirdi. Ish sifati yaxshi, narxi adolatli. Yana murojaat qilaman."</p>
+      <div class="reviewer">
+        <div class="avatar">D</div>
+        <div class="reviewer-info"><h5>Davlatov Dilshod</h5><span>Mirzo Ulug'bek</span></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Internet sozlashda qiynalayotgan edim. Telegram orqali murojaat qildim, 30 daqiqada kelib hal qildi. Super xizmat!"</p>
+      <div class="reviewer">
+        <div class="avatar">N</div>
+        <div class="reviewer-info"><h5>Nazarova Nodira</h5><span>Shayxontohur</span></div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"3 yildan beri doim PCMasterni chaqiraman. Kafolat beradi, ishini to'liq bajaradi. Ishonchli va tez."</p>
+      <div class="reviewer">
+        <div class="avatar">B</div>
+        <div class="reviewer-info"><h5>Boymurodov Behruz</h5><span>Olmazor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section-title fade-up">
+    <h2>Ko'p So'raladigan Savollar</h2>
+    <p>Eng tez-tez beriladigan savollarga javoblar</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Xizmat qancha vaqt oladi?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Ko'pchilik xizmatlar 30 daqiqadan 2 soatgacha davom etadi. Windows o'rnatish — 1 soat, virus tozalash — 1-2 soat, noutbuk ta'miri — muammoga qarab 1-3 soat.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Uyga kelib xizmat ko'rsatasizmi?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Ha, albatta! Toshkent bo'ylab uyga chiqib xizmat ko'rsatamiz. Chiqish narxi masofaga qarab 10,000–30,000 so'm oralig'ida bo'ladi.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Kafolat qancha muddat?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Barcha xizmatlarimizga 30 kunlik kafolat beramiz. Agar xuddi shu muammo qayta chiqsa, bepul hal qilamiz.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        To'lov qanday amalga oshiriladi?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Naqd pul yoki Click/Payme orqali to'lash mumkin. To'lov faqat xizmat tugagandan keyin olinadi.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Ma'lumotlarim saqlanib qoladimi?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Ha, albatta. Xizmatdan oldin muhim ma'lumotlaringizni zaxiralashni taklif qilamiz. Maxfiyligingiz bizga muhim.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Qaysi noutbuk brendlarini ta'mirlaysiz?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Barcha brendlarni: Lenovo, HP, Dell, Asus, Acer, Samsung, Apple MacBook va boshqalar. Kompyuter tizim bloklar ham.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARIZA FORMASI -->
+<section class="section" id="ariza">
+  <div class="section-title fade-up">
+    <h2>Ariza Qoldiring</h2>
+    <p>Muammoingizni yozing — tez orada bog'lanamiz</p>
+  </div>
+  <div class="form-wrap fade-up">
+    <form id="contactForm" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ismingiz</label>
+          <input type="text" placeholder="Jasur" required />
+        </div>
+        <div class="form-group">
+          <label>Telegram username</label>
+          <input type="text" placeholder="@username" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Qurilma turi</label>
+        <select required>
+          <option value="" disabled selected>Tanlang...</option>
+          <option>Kompyuter (stasionar)</option>
+          <option>Noutbuk</option>
+          <option>Ikkalasi ham</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Xizmat turi</label>
+        <select required>
+          <option value="" disabled selected>Tanlang...</option>
+          <option>Windows o'rnatish</option>
+          <option>Tezlashtirish & Optimizatsiya</option>
+          <option>Virus tozalash</option>
+          <option>Internet & Wi-Fi sozlash</option>
+          <option>Ma'lumot tiklash</option>
+          <option>Noutbuk ta'mirlash</option>
+          <option>Boshqa</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Muammoni tasvirlab bering</label>
+        <textarea placeholder="Masalan: Noutbukim juda sekin ishlayapti, yuklanishda 5 daqiqa ketadi..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Ariza yuborish →</button>
+    </form>
+    <div class="form-success" id="formSuccess">
+      ✅ Arizangiz qabul qilindi! Tez orada Telegram orqali bog'lanamiz.
+    </div>
+  </div>
+</section>
+
+<!-- ALOQA -->
+<section class="section" id="aloqa">
+  <div class="section-title fade-up">
+    <h2>Biz bilan Bog'laning</h2>
+    <p>Istalgan vaqt murojaat qilishingiz mumkin</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card fade-up">
+      <div class="icon">✈️</div>
+      <h4>Telegram</h4>
+      <a href="https://t.me/texno_uz" target="_blank">@texno_uz</a>
+    </div>
+    <div class="contact-card fade-up">
+      <div class="icon">📍</div>
+      <h4>Manzil</h4>
+      <a href="#">Toshkent, Chilonzor tumani</a>
+    </div>
+    <div class="contact-card fade-up">
+      <div class="icon">🕐</div>
+      <h4>Ish vaqti</h4>
+      <a href="#">9:00 — 21:00, har kuni</a>
+    </div>
+  </div>
+
+  <div class="social-btns">
+    <a href="https://t.me/texno_uz" class="social-btn telegram" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Telegramda yozing
+    </a>
+    <a href="https://instagram.com/texno.uz" class="social-btn instagram" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Instagramda kuzating
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-socials">
+    <a href="https://t.me/texno_uz" class="footer-social-link tg" target="_blank" title="Telegram">
+      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+    <a href="https://instagram.com/texno.uz" class="footer-social-link ig" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    </a>
+  </div>
+  <p>© 2025 <span>PCMaster</span> — Barcha huquqlar himoyalangan</p>
+</footer>
+
+<!-- SEARCH MODAL -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearchOutside(event)">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <span>🔍</span>
+      <input class="search-input" id="searchInput" placeholder="Xizmat, savol yoki kalit so'z qidiring..." oninput="doSearch(this.value)" onkeydown="searchKeydown(event)" autocomplete="off" />
+      <button class="search-close" onclick="closeSearch()">✕</button>
+    </div>
+    <div id="searchResults" class="search-results"></div>
+    <div class="search-hint" id="searchHint">
+      <span style="font-size:0.82rem;color:var(--text);">Mashhur:</span>
+      <span class="hint-tag" onclick="fillSearch('Windows')">Windows</span>
+      <span class="hint-tag" onclick="fillSearch('virus')">Virus</span>
+      <span class="hint-tag" onclick="fillSearch('noutbuk')">Noutbuk</span>
+      <span class="hint-tag" onclick="fillSearch('internet')">Internet</span>
+      <span class="hint-tag" onclick="fillSearch('narx')">Narx</span>
+    </div>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="scrollToTop()" title="Yuqoriga">↑</button>
+
+<script>
+  // SEARCH DATA
+  const searchData = [
+    { category: 'Xizmat', title: 'Windows O\'rnatish', desc: 'Windows 10/11 o\'rnatish, drayverlar va zarur dasturlar bilan.', link: '#xizmatlar', tags: 'windows o\'rnatish dastur driver' },
+    { category: 'Xizmat', title: 'Tezlashtirish & Optimizatsiya', desc: 'Sekin kompyuter yoki noutbukni optimizatsiya qilib, tezligini oshiramiz.', link: '#xizmatlar', tags: 'sekin tez optimizatsiya tezlashtirish' },
+    { category: 'Xizmat', title: 'Virus Tozalash', desc: 'Virus, troyan va zararli dasturlardan kompyuterni tozalaymiz.', link: '#xizmatlar', tags: 'virus troyan tozalash zararli' },
+    { category: 'Xizmat', title: 'Internet & Wi-Fi Sozlash', desc: 'Wi-Fi, router ulanishini sozlash va nosozliklarni bartaraf etish.', link: '#xizmatlar', tags: 'internet wifi router sozlash' },
+    { category: 'Xizmat', title: 'Ma\'lumot Tiklash', desc: 'Disk dan o\'chirilgan yoki shikastlangan ma\'lumotlarni tiklaymiz.', link: '#xizmatlar', tags: 'malumot tiklash disk o\'chirilgan' },
+    { category: 'Xizmat', title: 'Noutbuk Ta\'mirlash', desc: 'Klaviatura, ekran, batareya, quvvat bloki va boshqa qismlarni ta\'mirlash.', link: '#xizmatlar', tags: 'noutbuk tamirlash ekran klaviatura batareya' },
+    { category: 'FAQ', title: 'Xizmat qancha vaqt oladi?', desc: 'Ko\'pchilik xizmatlar 30 daqiqadan 2 soatgacha davom etadi.', link: '#faq', tags: 'vaqt qancha davom muddat' },
+    { category: 'FAQ', title: 'Uyga kelib xizmat ko\'rsatasizmi?', desc: 'Ha, Toshkent bo\'ylab uyga chiqib xizmat ko\'rsatamiz.', link: '#faq', tags: 'uyga chiqish kelish xizmat' },
+    { category: 'FAQ', title: 'Kafolat qancha muddat?', desc: 'Barcha xizmatlarimizga 30 kunlik kafolat beramiz.', link: '#faq', tags: 'kafolat muddat kun' },
+    { category: 'FAQ', title: 'To\'lov qanday amalga oshiriladi?', desc: 'Naqd pul yoki Click/Payme orqali to\'lash mumkin.', link: '#faq', tags: 'tolov click payme naqd' },
+    { category: 'FAQ', title: 'Ma\'lumotlarim saqlanib qoladimi?', desc: 'Ha, xizmatdan oldin ma\'lumotlarni zaxiralashni taklif qilamiz.', link: '#faq', tags: 'malumot saqlash maxfiy' },
+    { category: 'FAQ', title: 'Qaysi noutbuk brendlarini ta\'mirlaysiz?', desc: 'Lenovo, HP, Dell, Asus, Acer, Samsung, Apple MacBook va boshqalar.', link: '#faq', tags: 'lenovo hp dell asus acer macbook brend' },
+    { category: 'Narx', title: 'Windows narxi', desc: '50,000 so\'mdan boshlanadi.', link: '#xizmatlar', tags: 'narx windows qancha' },
+    { category: 'Narx', title: 'Virus tozalash narxi', desc: '70,000 so\'mdan boshlanadi.', link: '#xizmatlar', tags: 'narx virus qancha' },
+    { category: 'Aloqa', title: 'Telegram orqali bog\'laning', desc: '@texno_uz — tez javob beramiz.', link: '#aloqa', tags: 'telegram aloqa bog\'lanish' },
+    { category: 'Aloqa', title: 'Ish vaqti', desc: 'Har kuni 9:00 dan 21:00 gacha ishlaymiz.', link: '#aloqa', tags: 'ish vaqt soat kun' },
+  ];
+
+  function highlight(text, query) {
+    if (!query) return text;
+    const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(re, '<span class="result-highlight">$1</span>');
+  }
+
+  function doSearch(val) {
+    const q = val.trim().toLowerCase();
+    const resultsEl = document.getElementById('searchResults');
+    const hintEl = document.getElementById('searchHint');
+    if (!q) { resultsEl.innerHTML = ''; hintEl.style.display = 'flex'; return; }
+    hintEl.style.display = 'none';
+    const matches = searchData.filter(item =>
+      item.title.toLowerCase().includes(q) ||
+      item.desc.toLowerCase().includes(q) ||
+      item.tags.toLowerCase().includes(q)
+    );
+    if (!matches.length) {
+      resultsEl.innerHTML = '<div class="search-empty">😕 Hech narsa topilmadi. Boshqa kalit so\'z kiriting.</div>';
+      return;
+    }
+    resultsEl.innerHTML = matches.map(item => `
+      <a class="search-result-item" href="${item.link}" onclick="closeSearch()">
+        <div class="result-category">${item.category}</div>
+        <div class="result-title">${highlight(item.title, val.trim())}</div>
+        <div class="result-desc">${highlight(item.desc, val.trim())}</div>
+      </a>
+    `).join('');
+  }
+
+  function fillSearch(text) {
+    const input = document.getElementById('searchInput');
+    input.value = text;
+    doSearch(text);
+    input.focus();
+  }
+
+  function openSearch() {
+    document.getElementById('searchOverlay').classList.add('active');
+    setTimeout(() => document.getElementById('searchInput').focus(), 50);
+  }
+
+  function closeSearch() {
+    document.getElementById('searchOverlay').classList.remove('active');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchHint').style.display = 'flex';
+  }
+
+  function closeSearchOutside(e) {
+    if (e.target === document.getElementById('searchOverlay')) closeSearch();
+  }
+
+  function searchKeydown(e) {
+    if (e.key === 'Escape') closeSearch();
+  }
+
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  });
+
+  // THEME
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.querySelector('.theme-toggle');
+    if (html.getAttribute('data-theme') === 'dark') {
+      html.setAttribute('data-theme', 'light');
+      btn.textContent = '🌙';
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '☀️';
+    }
+  }
+
+  // BACK TO TOP
+  const backBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('show', window.scrollY > 400);
+  });
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // FAQ ACCORDION
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // FORM SUBMIT
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
